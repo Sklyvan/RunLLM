@@ -33,4 +33,3 @@ def splits_payload() -> dict[str, Any]:
 @pytest.fixture()
 def timeseries_payload() -> dict[str, Any]:
     return _load("timeseries.json")
-
