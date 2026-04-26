@@ -231,4 +231,3 @@ def _samples_from_details(payload: dict[str, Any]) -> list[GarminTimeSeriesSampl
             )
         )
     return samples
-
