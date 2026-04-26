@@ -50,9 +50,7 @@ class GarminService:
         self._session_factory = session_factory
         self._cipher = cipher
 
-    async def authenticate_user(
-        self, user_id: UUID, email: str, password: str
-    ) -> AuthResult:
+    async def authenticate_user(self, user_id: UUID, email: str, password: str) -> AuthResult:
         """Run a full username+password login and persist tokens."""
 
         try:
@@ -102,9 +100,7 @@ class GarminService:
         if not ok:
             raise GarminAuthError("stored garmin tokens were rejected")
 
-    async def _persist_tokens(
-        self, user_id: UUID, email: str, tokens: GarminAuthTokens
-    ) -> None:
+    async def _persist_tokens(self, user_id: UUID, email: str, tokens: GarminAuthTokens) -> None:
         encrypted = self._cipher.encrypt_dict(tokens.data)
         await self._update_user(
             user_id,
@@ -123,4 +119,3 @@ class GarminService:
                 setattr(user, name, value)
             session.add(user)
             await session.commit()
-
