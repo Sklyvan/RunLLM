@@ -42,10 +42,10 @@ class _FakeGarmin:
         self.resumed_with: tuple[Any, str] | None = None
 
         class _Garth:
-            def dumps(self_) -> str:
+            def dumps(self) -> str:
                 return "tokens-blob"
 
-            def loads(self_, data: str) -> None:  # noqa: ARG002
+            def loads(self, data: str) -> None:
                 return None
 
         self.garth = _Garth()
@@ -100,10 +100,10 @@ async def test_login_mfa_required_then_resume() -> None:
 
 @pytest.mark.asyncio
 async def test_login_auth_error_translated() -> None:
-    class _LibError(Exception):
+    class _LibAuthError(Exception):
         pass
 
-    client = GarminClient(garmin_factory=_factory(login_error=_LibError("bad password")))
+    client = GarminClient(garmin_factory=_factory(login_error=_LibAuthError("bad password")))
     with pytest.raises(GarminAuthError):
         await client.login("a@b.com", "pw")
 
@@ -121,9 +121,7 @@ async def test_list_activities_parses_payload(
 ) -> None:
     client = GarminClient(garmin_factory=_factory(activities=activities_payload))
     await client.login("a@b.com", "pw")
-    rows = await client.list_activities(
-        datetime(2026, 4, 1), datetime(2026, 4, 30), limit=10
-    )
+    rows = await client.list_activities(datetime(2026, 4, 1), datetime(2026, 4, 30), limit=10)
     assert len(rows) == 2
     assert rows[0].activity_id == "1001"
     assert rows[0].avg_hr == 150
@@ -167,14 +165,14 @@ async def test_calls_before_login_raise() -> None:
 
 @pytest.mark.asyncio
 async def test_list_activities_translates_lib_errors() -> None:
-    class _Boom(Exception):
+    class _BoomError(Exception):
         pass
 
     def make(email: str | None, password: str | None) -> _FakeGarmin:
         fake = _FakeGarmin(email, password, activities=[])
 
         def boom(*_a: Any, **_k: Any) -> None:
-            raise _Boom("upstream error")
+            raise _BoomError("upstream error")
 
         fake.get_activities_by_date = boom  # type: ignore[method-assign]
         return fake
@@ -183,4 +181,3 @@ async def test_list_activities_translates_lib_errors() -> None:
     await client.login("a@b.com", "pw")
     with pytest.raises(GarminApiError):
         await client.list_activities(datetime(2026, 4, 1), datetime(2026, 4, 2))
-
