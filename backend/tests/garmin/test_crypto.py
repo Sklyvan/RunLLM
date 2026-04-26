@@ -39,4 +39,3 @@ def test_generate_key_is_valid_fernet_key() -> None:
     key = CredentialCipher.generate_key()
     cipher = CredentialCipher(key=key)
     assert cipher.decrypt(cipher.encrypt("x")) == "x"
-
