@@ -182,4 +182,3 @@ async def test_fetch_activities_without_credentials_raises(
     svc, _fake = service
     with pytest.raises(GarminAuthError):
         await svc.fetch_activities_since(user_id, datetime(2026, 1, 1, tzinfo=UTC))
-
