@@ -42,6 +42,6 @@ npm run dev
 
 ## Coding standards
 
-See [`LLM.md`](./LLM.md) at the repo root. Every contributor and every
+See [`LLM.md`](docs/LLM.md) at the repo root. Every contributor and every
 AI agent working in this repo must follow it.
 
