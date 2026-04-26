@@ -56,4 +56,3 @@ class CredentialCipher:
         """Return a freshly generated Fernet key as a UTF-8 string."""
 
         return Fernet.generate_key().decode("utf-8")
-
