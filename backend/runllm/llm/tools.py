@@ -65,7 +65,7 @@ TOOL_SCHEMAS: list[dict[str, Any]] = [
     {
         "name": "compute_pace_zones",
         "description": (
-            "Return time spent in heart-rate zones (Z1–Z5) for one activity. "
+            "Return time spent in heart-rate zones (Z1-Z5) for one activity. "
             "Zones are computed from the user's max HR (estimated as 220-age "
             "if unknown)."
         ),
@@ -96,7 +96,7 @@ TOOL_SCHEMAS: list[dict[str, Any]] = [
 
 
 def _zone_thresholds(max_hr: int) -> list[tuple[str, float, float]]:
-    """Return inclusive ``(label, low_pct, high_pct)`` triples for Z1–Z5."""
+    """Return inclusive ``(label, low_pct, high_pct)`` triples for Z1-Z5."""
 
     return [
         ("Z1", 0.50, 0.60),
@@ -134,7 +134,7 @@ class ToolRegistry:
                 return await self.list_activities_by_filter(**arguments)
         except LLMToolError:
             raise
-        except Exception as exc:  # noqa: BLE001
+        except Exception as exc:
             logger.exception("tool %s failed", name)
             raise LLMToolError(f"{name}: {exc}") from exc
         raise LLMToolError(f"unknown tool: {name}")
@@ -159,9 +159,7 @@ class ToolRegistry:
         }
         return json.dumps(payload)
 
-    async def get_activity_timeseries(
-        self, activity_id: str, downsample_seconds: int = 5
-    ) -> str:
+    async def get_activity_timeseries(self, activity_id: str, downsample_seconds: int = 5) -> str:
         activity = await self._load_activity(activity_id)
         if not activity.has_timeseries or not activity.timeseries_storage_path:
             return json.dumps({"error": "no timeseries available"})
@@ -219,8 +217,7 @@ class ToolRegistry:
         return json.dumps(
             {
                 "activities": [
-                    {"id": str(a.id), "summary": summarize_activity_for_prompt(a)}
-                    for a in rows
+                    {"id": str(a.id), "summary": summarize_activity_for_prompt(a)} for a in rows
                 ]
             }
         )
@@ -258,9 +255,7 @@ def _downsample(table: Any, every_seconds: int) -> list[list[Any]]:
         if last_ts is not None and (ts - last_ts).total_seconds() < every_seconds:
             continue
         last_ts = ts
-        rows.append(
-            [ts.isoformat() if hasattr(ts, "isoformat") else ts, lat, lon, hr, speed]
-        )
+        rows.append([ts.isoformat() if hasattr(ts, "isoformat") else ts, lat, lon, hr, speed])
     return rows
 
 
@@ -273,4 +268,3 @@ def _summary_stats(table: Any) -> dict[str, Any]:
         "max_hr": max(hr) if hr else None,
         "avg_speed": sum(speed) / len(speed) if speed else None,
     }
-
