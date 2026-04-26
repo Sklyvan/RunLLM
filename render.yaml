@@ -4,11 +4,10 @@ services:
     runtime: docker
     plan: free
     region: frankfurt
-    rootDir: backend
-    dockerfilePath: ./Dockerfile
+    dockerfilePath: ./backend/Dockerfile
+    dockerContext: ./backend
     healthCheckPath: /healthz
     autoDeploy: true
-    previewsEnabled: false
     envVars:
       - key: ENVIRONMENT
         value: prod
