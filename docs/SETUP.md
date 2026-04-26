@@ -42,10 +42,21 @@ cp frontend/.env.example frontend/.env
    driver prefix and substitute your DB password:
 
    ```
-   postgresql+asyncpg://postgres:<PASSWORD>@db.<REF>.supabase.co:5432/postgres
+   postgresql+asyncpg://postgres:<URL_ENCODED_PASSWORD>@db.<REF>.supabase.co:5432/postgres
    ```
 
    Paste it into `backend/.env` as `DATABASE_URL`.
+
+   > ⚠️ **URL-encode special characters in the password.** If your
+   > password contains any of `$ & % * ^ # @ / : ?` etc., the dotenv
+   > parser and/or SQLAlchemy will choke (you'll see
+   > `ValueError: invalid interpolation syntax`). Encode them like
+   > this — `$` → `%24`, `&` → `%26`, `%` → `%25`, `*` → `%2A`,
+   > `^` → `%5E` — or generate one in Python:
+   >
+   > ```bash
+   > python -c "import urllib.parse, sys; print(urllib.parse.quote(sys.argv[1], safe=''))" '<your-password>'
+   > ```
 
 > ⚠️ The `service_role` key bypasses Row Level Security. Treat it like
 > a root password — backend only, never in the SvelteKit app, never in
