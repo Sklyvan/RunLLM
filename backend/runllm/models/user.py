@@ -32,3 +32,6 @@ class User(UUIDPrimaryKey, TimestampedBase, table=True):
         default=None,
         sa_column=Column(DateTime(timezone=True), nullable=True),
     )
+
+    preferred_language: str = Field(default="en", max_length=8, nullable=False)
+    max_hr: int | None = Field(default=None)
