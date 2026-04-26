@@ -71,4 +71,3 @@ def get_settings() -> Settings:
     """Return a cached :class:`Settings` instance."""
 
     return Settings()
-

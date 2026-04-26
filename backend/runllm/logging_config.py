@@ -26,4 +26,3 @@ def setup_logging(level: str = "INFO") -> None:
     handler.setFormatter(logging.Formatter(fmt=_FORMAT, datefmt=_DATEFMT))
     root.addHandler(handler)
     root.setLevel(level.upper())
-
