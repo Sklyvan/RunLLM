@@ -1,6 +1,6 @@
-# RUNBOOK
+# 📖 RUNBOOK
 
-## Rotate the Fernet key
+## 🔄 Rotate the Fernet key
 
 1. Generate a new key:
 
@@ -13,7 +13,7 @@
    new key, write back.
 3. Update `FERNET_KEY` on Render and redeploy.
 
-## Reset a user's Garmin credentials
+## 🧹 Reset a user's Garmin credentials
 
 ```sql
 update "user"
@@ -25,7 +25,7 @@ where id = '<user-id>';
 
 The user can re-link from the Settings page.
 
-## Manually trigger a sync
+## ⚡ Manually trigger a sync
 
 While impersonating the user (use their JWT):
 
@@ -34,17 +34,17 @@ curl -X POST https://<render-host>/api/v1/garmin/sync \
      -H "Authorization: Bearer $JWT"
 ```
 
-## Read logs
+## 📜 Read logs
 
-- Render: `Service → Logs` tab.
-- Vercel: `Project → Deployments → <deployment> → Functions`.
-- Local: stdout (structured one-line logs with `request_id`).
+- ☁️ Render: `Service → Logs` tab.
+- ▲ Vercel: `Project → Deployments → <deployment> → Functions`.
+- 💻 Local: stdout (structured one-line logs with `request_id`).
 
-## Common issues
+## 🩺 Common issues
 
 | Symptom | Cause | Fix |
 | --- | --- | --- |
-| `401` from `/api/v1/...` | Expired or wrong JWT | Sign out + sign in. |
-| `409 mfa_required` on sync | Garmin invalidated cached tokens | Hit `/api/v1/garmin/credentials` then `/api/v1/garmin/mfa`. |
-| `502` from `/api/v1/chat` | Anthropic API issue | Check Anthropic status page; retry. |
+| 🚫 `401` from `/api/v1/...` | Expired or wrong JWT | Sign out + sign in. |
+| 🔐 `409 mfa_required` on sync | Garmin invalidated cached tokens | Hit `/api/v1/garmin/credentials` then `/api/v1/garmin/mfa`. |
+| 🤖 `502` from `/api/v1/chat` | Anthropic API issue | Check Anthropic status page; retry. |
 
