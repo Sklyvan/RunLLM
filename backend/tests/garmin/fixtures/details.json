@@ -1,0 +1,10 @@
+{
+  "activityId": "1001",
+  "activityName": "Morning Run",
+  "summaryDTO": {
+    "distance": 5000.0,
+    "duration": 1500.0,
+    "averageHR": 150
+  }
+}
+

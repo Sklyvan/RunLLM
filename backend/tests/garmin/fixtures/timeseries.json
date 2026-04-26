@@ -1,0 +1,32 @@
+{
+  "activityDetailMetrics": [
+    {
+      "timestamp": "2026-04-10T07:30:00",
+      "lat": 41.3851,
+      "lon": 2.1734,
+      "elevation": 12.0,
+      "heartRate": 130,
+      "cadence": 168,
+      "speed": 3.0
+    },
+    {
+      "timestamp": "2026-04-10T07:30:01",
+      "lat": 41.3852,
+      "lon": 2.1735,
+      "elevation": 12.1,
+      "heartRate": 132,
+      "cadence": 170,
+      "speed": 3.1
+    },
+    {
+      "timestamp": "2026-04-10T07:30:02",
+      "lat": 41.3853,
+      "lon": 2.1736,
+      "elevation": 12.2,
+      "heartRate": 134,
+      "cadence": 172,
+      "speed": 3.2
+    }
+  ]
+}
+

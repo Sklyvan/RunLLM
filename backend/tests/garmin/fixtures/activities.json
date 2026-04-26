@@ -1,0 +1,27 @@
+[
+  {
+    "activityId": "1001",
+    "activityType": "running",
+    "startTimeGMT": "2026-04-10T07:30:00",
+    "distance": 5000.0,
+    "duration": 1500.0,
+    "averageHR": 150,
+    "maxHR": 175,
+    "averageSpeed": 3.33,
+    "averageRunningCadenceInStepsPerMinute": 170.0,
+    "elevationGain": 50.0,
+    "calories": 350
+  },
+  {
+    "activityId": "1002",
+    "activityType": "trail_running",
+    "startTimeGMT": "2026-04-12T08:00:00",
+    "distance": 10000.0,
+    "duration": 3600.0,
+    "averageHR": 145,
+    "maxHR": 178,
+    "elevationGain": 320.0,
+    "calories": 720
+  }
+]
+

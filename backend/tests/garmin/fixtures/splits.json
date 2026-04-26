@@ -1,0 +1,26 @@
+{
+  "lapDTOs": [
+    {
+      "distance": 1000.0,
+      "duration": 290.0,
+      "averagePaceSecondsPerKm": 290.0,
+      "averageHR": 145,
+      "elevationGain": 5.0
+    },
+    {
+      "distance": 1000.0,
+      "duration": 295.0,
+      "averagePaceSecondsPerKm": 295.0,
+      "averageHR": 148,
+      "elevationGain": 6.0
+    },
+    {
+      "distance": 1000.0,
+      "duration": 300.0,
+      "averagePaceSecondsPerKm": 300.0,
+      "averageHR": 152,
+      "elevationGain": 4.0
+    }
+  ]
+}
+
