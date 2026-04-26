@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+	body {
+		font-family: theme('fontFamily.sans');
+	}
+}
+
+.bubble-user {
+	@apply self-end max-w-[80%] rounded-lg bg-blue-600 px-4 py-2 text-white;
+}
+
+.bubble-assistant {
+	@apply self-start max-w-[80%] rounded-lg bg-zinc-100 px-4 py-2 text-zinc-900 dark:bg-zinc-800 dark:text-zinc-100;
+}
+
+.prose-tight :is(p, ul, ol, pre) {
+	margin: 0.25rem 0;
+}
+
