@@ -25,7 +25,10 @@ if config.config_file_name is not None:
     fileConfig(config.config_file_name)
 
 settings = get_settings()
-config.set_main_option("sqlalchemy.url", settings.database_url)
+# Alembic stores options in a configparser, which treats ``%`` as the
+# start of a variable interpolation. Escape any literal ``%`` (common in
+# URL-encoded passwords) before handing the URL over.
+config.set_main_option("sqlalchemy.url", settings.database_url.replace("%", "%%"))
 
 target_metadata = SQLModel.metadata
 
@@ -76,4 +79,3 @@ if context.is_offline_mode():
     run_migrations_offline()
 else:
     asyncio.run(run_migrations_online())
-
