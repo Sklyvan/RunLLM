@@ -71,4 +71,3 @@ def garmin_summary_to_activity_kwargs(
         "splits_json": splits_payload,
         "raw_summary_json": raw,
     }
-
