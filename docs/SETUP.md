@@ -38,18 +38,29 @@ cp frontend/.env.example frontend/.env
    | `Project API keys → service_role`  | `backend/.env` only — **never** the frontend | `SUPABASE_SERVICE_KEY`  |
 
 4. In the left sidebar go to **Project Settings → Database →
-   Connection string → URI**. Copy the connection string, replace the
-   driver prefix and substitute your DB password:
+   Connection string**. **Pick the "Session pooler" tab** (not "Direct
+   connection"), choose **URI**, copy it, then change the prefix to
+   `postgresql+asyncpg://`. The result looks like:
 
    ```
-   postgresql+asyncpg://postgres:<URL_ENCODED_PASSWORD>@db.<REF>.supabase.co:5432/postgres
+   postgresql+asyncpg://postgres.<REF>:<URL_ENCODED_PASSWORD>@aws-0-<REGION>.pooler.supabase.com:5432/postgres
    ```
 
    Paste it into `backend/.env` as `DATABASE_URL`.
 
+   > 🌐 **Why the pooler and not the direct host?** Supabase's
+   > `db.<ref>.supabase.co` host is IPv6-only on the free tier — most
+   > home/office networks can't resolve it and you'll see
+   > `socket.gaierror: nodename nor servname provided, or not known`.
+   > The Session pooler (`aws-0-<region>.pooler.supabase.com:5432`)
+   > works over IPv4 and is the right choice for Alembic + long-lived
+   > backend connections. The Transaction pooler (port `6543`) does
+   > **not** support multi-statement transactions and will break
+   > migrations.
+
    > ⚠️ **URL-encode special characters in the password.** If your
    > password contains any of `$ & % * ^ # @ / : ?` etc., the dotenv
-   > parser and/or SQLAlchemy will choke (you'll see
+   > parser and SQLAlchemy will choke (you'll see
    > `ValueError: invalid interpolation syntax`). Encode them like
    > this — `$` → `%24`, `&` → `%26`, `%` → `%25`, `*` → `%2A`,
    > `^` → `%5E` — or generate one in Python:
