@@ -171,7 +171,7 @@ class GarminClient:
 def _default_factory(email: str | None, password: str | None) -> Any:
     """Import ``garminconnect`` lazily and return a ``Garmin`` instance."""
 
-    from garminconnect import Garmin  # type: ignore[import-untyped]
+    from garminconnect import Garmin
 
     return Garmin(email, password)
 
